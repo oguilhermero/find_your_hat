@@ -36,6 +36,17 @@ class Field {
         }
     }
 
+    static generate() {
+        let pathArray = [];
+        let elementsArray = [fieldCharacter, hole, fieldCharacter, hole, fieldCharacter, hole, fieldCharacter, hole, fieldCharacter, fieldCharacter]
+        for (let i = 0; i < 11; i++){
+            pathArray.push(Array.from({length: 5}, () => elementsArray[Math.floor(Math.random() * 10)]));
+        }
+        pathArray[0][0] = pathCharacter;
+        pathArray[10][Math.floor(Math.random() * 5)] = hat;
+        return pathArray;
+    }
+
 }
 
 //Out of bounds check functions
@@ -63,7 +74,7 @@ const hatWalkCheck = (obj) => {
 }
 
 
-let gameField = new Field([[pathCharacter,fieldCharacter,fieldCharacter,hole,fieldCharacter],[hole,fieldCharacter,fieldCharacter,fieldCharacter,hole],[hole,hole,fieldCharacter,fieldCharacter,hole],[hole,fieldCharacter,fieldCharacter,fieldCharacter,hole],[fieldCharacter,hole,hat,hole,fieldCharacter]]);
+let gameField = new Field(Field.generate());
 
 
 while (!outOfBounds && !holeWalk && !hatWalk) {
